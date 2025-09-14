@@ -41,7 +41,7 @@ To get the **backend** of this project up and running, follow these steps:
           * `MONGO_DATABASE_NAME=vox`
       * **Storage:**
           * `MAX_MB_UPLOAD_SIZE=5`
-      * **Payment Config:**
+      <!-- * **Payment Config:**
           * `VERIFY_PAYMENT_CALLBACK_PAHT=/orders/verify`
           * `VERIFY_PAYMENT_CALLBACK_URL=http://localhost:3000/orders/verify`
       * **Zarinpal Payment Config:**
@@ -49,7 +49,7 @@ To get the **backend** of this project up and running, follow these steps:
           * `ZARINPAL_PAYMENT_REQUEST_URL=https://sandbox.zarinpal.com/pg/v4/payment/request.json`
           * `ZARINPAL_VRIFY_PAYMENT_URL=https://sandbox.zarinpal.com/pg/v4/payment/verify.json`
           * `ZARINPAL_REFUND_URL=https://sandbox.zarinpal.com/pg/v4/payment/refund.json`
-          * `ZARINPAL_PAY_URL=https://sandbox.zarinpal.com/pg/StartPay`
+          * `ZARINPAL_PAY_URL=https://sandbox.zarinpal.com/pg/StartPay` -->
       * **SMS Config (Kavenegar):**
           * `KAVENEGAR_API_KEY=...`
           * `KAVENEGAR_SENDER_NUMBER=...`

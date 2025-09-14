@@ -41,7 +41,7 @@
           * `MONGO_DATABASE_NAME=vox`
       * **تنظیمات ذخیره‌سازی:**
           * `MAX_MB_UPLOAD_SIZE=5`
-      * **تنظیمات پرداخت:**
+      <!-- * **تنظیمات پرداخت:**
           * `VERIFY_PAYMENT_CALLBACK_PAHT=/orders/verify`
           * `VERIFY_PAYMENT_CALLBACK_URL=http://localhost:3000/orders/verify`
       * **تنظیمات پرداخت زرین‌پال:**
@@ -49,7 +49,7 @@
           * `ZARINPAL_PAYMENT_REQUEST_URL=https://sandbox.zarinpal.com/pg/v4/payment/request.json`
           * `ZARINPAL_VRIFY_PAYMENT_URL=https://sandbox.zarinpal.com/pg/v4/payment/verify.json`
           * `ZARINPAL_REFUND_URL=https://sandbox.zarinpal.com/pg/v4/payment/refund.json`
-          * `ZARINPAL_PAY_URL=https://sandbox.zarinpal.com/pg/StartPay`
+          * `ZARINPAL_PAY_URL=https://sandbox.zarinpal.com/pg/StartPay` -->
       * **تنظیمات پیامک (Kavenegar):**
           * `KAVENEGAR_API_KEY=...`
           * `KAVENEGAR_SENDER_NUMBER=...`
