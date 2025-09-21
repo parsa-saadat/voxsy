@@ -1,4 +1,3 @@
-import { Logger } from '../../../utils/generators/logs/logger.log.js';
 import { loginService, sendCodeService, validateTokenService } from './auth.service.js';
 
 export const sendCodeController = async (req, res) => {

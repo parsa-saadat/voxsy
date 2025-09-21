@@ -1,7 +1,7 @@
 import express from 'express';
 
-import { preMiddleware } from '../../modules/auth/users/auth.middleware.js';
-import { loginController, sendCodeController, validateTokenController } from '../../modules/auth/users/aurh.controller.js';
+import { preMiddleware } from '../../modules/auth/auth.middleware.js';
+import { loginController, sendCodeController, validateTokenController } from '../../modules/auth/aurh.controller.js';
 import createLimiter from '../../middlewares/safety/ratelimiter.middleware.js';
 
 const router = express.Router();

@@ -2,20 +2,19 @@ import { readFileSync } from 'fs'
 
 import { v4 as uuidv4 } from 'uuid';
 import { hash, genSalt, compare } from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import axios from 'axios';
 
-import { __dirname } from '../../../app.js'
+import { __dirname } from '../../app.js'
 import {
   findOneUser,
   insertUser,
   updateOneUser,
-} from '../../../models/controllers/users/users.controller.js';
-import { validateIRPhoneSyntax } from '../../../utils/validators/phone.validator.js';
-import { generateNumber } from '../../../utils/generators/number.generator.js';
-import { validateEmailSyntax } from '../../../utils/validators/email.validator.js';
-import { signToken, verifyToken } from '../../../configs/token.config.js';
-import { mailSender } from '../../../configs/mail.config.js';
+} from '../../models/controllers/users/users.controller.js';
+import { validateIRPhoneSyntax } from '../../utils/validators/phone.validator.js';
+import { generateNumber } from '../../utils/generators/number.generator.js';
+import { validateEmailSyntax } from '../../utils/validators/email.validator.js';
+import { signToken, verifyToken } from '../../configs/token.config.js';
+import { mailSender } from '../../configs/mail.config.js';
 
 export const preService = async (data) => {
   let email = data?.email,
