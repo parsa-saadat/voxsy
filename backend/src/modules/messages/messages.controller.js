@@ -2,7 +2,7 @@ import { deleteMessageService, editMessageService, getMessagesService, seenMessa
 
 export const sendMessageController = async (req, res) => {
   try {
-    const message = await sendMessageService(req.params.userId, req.body, req.files, req.user);
+    const message = await sendMessageService(req.params.userId, req.body, req.user);
     res.status(201).json({
       body: message,
       status: 201,

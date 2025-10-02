@@ -3,8 +3,8 @@ import { deleteOneMessage, findMessages, findOneMessage, insertMessage, updateOn
 import { findOneFile } from "../../models/controllers/storage/storage.controller.js"
 import { findOneUser } from "../../models/controllers/users/users.controller.js"
 
-export const sendMessageService = async (reciverId, data, files, requester) => {
-  const { content } = data
+export const sendMessageService = async (reciverId, data, requester) => {
+  let { content, files } = data
 
   if (!content && !files)
     throw new Error("Message Not Have Any File Or Text Content", { cause: { code: 400 } })
@@ -16,9 +16,9 @@ export const sendMessageService = async (reciverId, data, files, requester) => {
   if (typeof content !== 'string')
     throw new Error("Contecnt Type of 'content' Key Must Be String", { cause: { code: 400 } })
 
-  const resiver = await findOneUser({ _id: reciverId })
+  const reciver = await findOneUser({ _id: reciverId })
 
-  if (!resiver)
+  if (!reciver)
     throw new Error("User Not Found With This ResiverId", { cause: { code: 404 } })
 
   if (files) {
@@ -29,8 +29,10 @@ export const sendMessageService = async (reciverId, data, files, requester) => {
     }
   }
 
+  files = files.filter((item) => item == null)
+
   const newMessage = {
-    resiver_id: new ObjectId(resiver._id),
+    resiver_id: new ObjectId(reciver._id),
     sender_id: new ObjectId(requester._id),
     content,
     files,

@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.post('/upload', authenticateToken, uploadMiddleware.array('files'), uploadController);
 
-router.get('/', authenticateToken, authorizeRoles(['owner', "manager", 'admin']), getFilesController);
+router.get('/', authenticateToken, authorizeRoles(['owner', 'manager', 'admin']), getFilesController);
 
 router.get('/:id', getOneFileController);
 
