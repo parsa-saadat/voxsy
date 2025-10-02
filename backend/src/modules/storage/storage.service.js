@@ -3,7 +3,7 @@ import {
   findFiles,
   findOneFile,
   insertFile,
-} from '../../models/controllers/storage.controller.js';
+} from '../../models/controllers/storage/storage.controller.js';
 
 const { ALLOWED_MIME_TYPES, MAX_MB_UPLOAD_SIZE } = process.env
 

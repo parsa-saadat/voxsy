@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 
-import db from '../../configs/mongodb.config.js';
+import db from '../../../configs/mongodb.config.js';
 
 export const insertFile = async (data) => {
   const insert = await db.collection('storage').insertOne({

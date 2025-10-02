@@ -55,8 +55,8 @@ export const getFilesController = async (req, res) => {
 export const getOneFileController = async (req, res) => {
   try {
     const file = await getFileService(req.params.id);
-    res.setHeader('content-type', file.contentType);
-    res.status(200).send(file.buffer);
+
+    res.json(file)
   } catch (e) {
     res.status(e.cause?.code || 500).json({
       body: null,
