@@ -2,8 +2,10 @@ import { ObjectId } from "mongodb"
 import { deleteOneMessage, findMessages, findOneMessage, insertMessage, updateOneMessage } from "../../models/controllers/messages/messages.controller.js"
 import { findOneFile } from "../../models/controllers/storage/storage.controller.js"
 import { findOneUser } from "../../models/controllers/users/users.controller.js"
+import redisClient from "../../configs/redis.config.js"
+import { io } from "../../app.js"
 
-export const sendMessageService = async (reciverId, data, requester) => {
+export const sendMessageService = async (receiverId, data, requester) => {
   let { content, files } = data
 
   if (!content && !files)
@@ -16,10 +18,10 @@ export const sendMessageService = async (reciverId, data, requester) => {
   if (typeof content !== 'string')
     throw new Error("Contecnt Type of 'content' Key Must Be String", { cause: { code: 400 } })
 
-  const reciver = await findOneUser({ _id: reciverId })
+  const receiver = await findOneUser({ _id: receiverId })
 
-  if (!reciver)
-    throw new Error("User Not Found With This ResiverId", { cause: { code: 404 } })
+  if (!receiver)
+    throw new Error("User Not Found With This receiverId", { cause: { code: 404 } })
 
   if (files) {
     for (let i = 0; i < files.length; i++) {
@@ -32,7 +34,7 @@ export const sendMessageService = async (reciverId, data, requester) => {
   files = files.filter((item) => item == null)
 
   const newMessage = {
-    resiver_id: new ObjectId(reciver._id),
+    receiver_id: new ObjectId(receiver._id),
     sender_id: new ObjectId(requester._id),
     content,
     files,
@@ -40,11 +42,18 @@ export const sendMessageService = async (reciverId, data, requester) => {
     edited: false
   }
 
-  return await insertMessage(newMessage)
+  const message = await insertMessage(newMessage)
+
+  const receiverSocketId = await redisClient.hGet("usersIdToSocketId", receiver._id.toString())
+  if (receiverSocketId)
+    io.to(receiverSocketId).emit("newMessage", message)
+
+  return message
 }
 
 export const seenMessageService = async (messageId, requester) => {
-  const message = await findOneMessage({ _id: messageId, resiver_id: requester._id })
+  const message = await findOneMessage({ _id: messageId, receiver_id: requester._id })
+  console.log({ _id: messageId, receiver_id: requester._id }, message);
 
   if (!message)
     throw new Error("Message Not Found!", { cause: { code: 404 } })
@@ -52,12 +61,19 @@ export const seenMessageService = async (messageId, requester) => {
   if (message.seen)
     throw new Error("Message Alredy Is Seened", { cause: { code: 400 } })
 
-  return await updateOneMessage({ _id: messageId, resiver_id: requester._id }, { seen: true })
+  const update = await updateOneMessage({ _id: messageId, receiver_id: requester._id }, { seen: true })
+
+  const receiverSocketId = await redisClient.hGet("usersIdToSocketId", message.sender_id.toString())
+  console.log(receiverSocketId);
+  if (receiverSocketId)
+    io.to(receiverSocketId).emit("seenMessage", update)
+
+  return update
 }
 
-export const getMessagesService = async (resiverId, requester, filters) => {
+export const getMessagesService = async (receiverId, requester, filters) => {
   let desc = filters.desc == "true" ? true : false, search = filters.search
-  let messages = await findMessages({ resiver_id: resiverId, sender_id: requester._id }, desc)
+  let messages = await findMessages({ receiver_id: receiverId, sender_id: requester._id }, desc)
 
   if (search)
     messages = messages.filter((item) => item.content.includes(search))
@@ -80,7 +96,14 @@ export const editMessageService = async (messageId, data, requester) => {
   if (!message)
     throw new Error("Message Not Found!", { cause: { code: 404 } })
 
-  return await updateOneMessage({ _id: messageId, sender_id: requester._id }, { content, edited: true })
+  const update = await updateOneMessage({ _id: messageId, sender_id: requester._id }, { content, edited: true })
+
+  const receiverSocketId = await redisClient.hGet("usersIdToSocketId", message.receiver_id.toString())
+
+  if (receiverSocketId)
+    io.to(receiverSocketId).emit("editMessage", update)
+
+  return update
 }
 
 export const deleteMessageService = async (messageId, requester) => {
@@ -89,5 +112,12 @@ export const deleteMessageService = async (messageId, requester) => {
   if (!message)
     throw new Error("Message Not Found!", { cause: { code: 404 } })
 
-  return await deleteOneMessage({ _id: messageId, sender_id: requester._id })
+  await deleteOneMessage({ _id: messageId, sender_id: requester._id })
+
+  const receiverSocketId = await redisClient.hGet("usersIdToSocketId", message.receiver_id.toString())
+
+  if (receiverSocketId)
+    io.to(receiverSocketId).emit('deleteMessage', message)
+
+  return null
 }

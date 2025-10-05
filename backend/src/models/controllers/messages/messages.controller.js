@@ -24,8 +24,8 @@ export const updateMessages = async (field, data) => {
   if (field?._id) {
     field._id = new ObjectId(field._id);
   }
-  if (field?.resiver_id) {
-    field.resiver_id = new ObjectId(field.resiver_id);
+  if (field?.receiver_id) {
+    field.receiver_id = new ObjectId(field.receiver_id);
   }
   if (field?.sender_id) {
     field.sender_id = new ObjectId(field.sender_id);
@@ -45,8 +45,8 @@ export const updateOneMessage = async (field, data) => {
   if (field?._id) {
     field._id = new ObjectId(field._id);
   }
-  if (field?.resiver_id) {
-    field.resiver_id = new ObjectId(field.resiver_id);
+  if (field?.receiver_id) {
+    field.receiver_id = new ObjectId(field.receiver_id);
   }
   if (field?.sender_id) {
     field.sender_id = new ObjectId(field.sender_id);
@@ -70,8 +70,8 @@ export const findMessages = async (field, desc) => {
   if (field?._id) {
     field._id = new ObjectId(field._id);
   }
-  if (field?.resiver_id) {
-    field.resiver_id = new ObjectId(field.resiver_id);
+  if (field?.receiver_id) {
+    field.receiver_id = new ObjectId(field.receiver_id);
   }
   if (field?.sender_id) {
     field.sender_id = new ObjectId(field.sender_id);
@@ -84,8 +84,8 @@ export const findOneMessage = async (field) => {
   if (field?._id) {
     field._id = new ObjectId(field._id);
   }
-  if (field?.resiver_id) {
-    field.resiver_id = new ObjectId(field.resiver_id);
+  if (field?.receiver_id) {
+    field.receiver_id = new ObjectId(field.receiver_id);
   }
   if (field?.sender_id) {
     field.sender_id = new ObjectId(field.sender_id);
@@ -100,8 +100,8 @@ export const deleteOneMessage = async (field) => {
   if (field?._id) {
     field._id = new ObjectId(field._id);
   }
-  if (field?.resiver_id) {
-    field.resiver_id = new ObjectId(field.resiver_id);
+  if (field?.receiver_id) {
+    field.receiver_id = new ObjectId(field.receiver_id);
   }
   if (field?.sender_id) {
     field.sender_id = new ObjectId(field.sender_id);
