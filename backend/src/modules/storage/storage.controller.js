@@ -56,8 +56,13 @@ export const getOneFileController = async (req, res) => {
   try {
     const file = await getFileService(req.params.id);
 
-    res.json(file)
+    const buffer = Buffer.from(file.data.buffer);
+    
+    res.setHeader('Content-Disposition', 'inline');
+    res.contentType(file.contentType);
+    res.send(buffer);
   } catch (e) {
+    console.error(e);
     res.status(e.cause?.code || 500).json({
       body: null,
       status: e.cause?.code || 500,
@@ -66,6 +71,7 @@ export const getOneFileController = async (req, res) => {
     });
   }
 };
+
 
 export const deleteOneFileController = async (req, res) => {
   try {

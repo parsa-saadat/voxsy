@@ -50,7 +50,17 @@ const rateLimiter = createLimiter({ windowMs: 15 * 60 * 1000, max: 200 });
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }, 
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "http://localhost:5173"], 
+      styleSrc: ["'self'", "'unsafe-inline'", "https:"],
+      scriptSrc: ["'self'", "https:"],
+    },
+  },
+}));
 
 app.use(cors(corsOptions));
 
