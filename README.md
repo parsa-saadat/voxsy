@@ -2,7 +2,7 @@
 
 A modern and powerful chat application with real-time communication capabilities
 
-![Chat App Banner](https://via.placeholder.com/1200x400/3B82F6/FFFFFF?text=Chat+App+-+Real-time+Messaging)
+![Banner](https://uploaded.photo/2025/10/08/8161cf516d8ece3d4b22ef6b144708a6.png)
 
 ## 🚀 Key Features
 
