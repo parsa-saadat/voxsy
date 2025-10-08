@@ -30,17 +30,10 @@ export default function ChatWindow({ userId }) {
     <div className="flex-1 flex flex-col bg-gray-800/50 backdrop-blur-md">
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {messages.map((msg) => (
-          <MessageBubble
-            key={msg._id}
-            message={msg.content}
-            sender={msg.sender_id}
-            seen={msg.seen}
-            edited={msg.edited}
-            files={msg.files}
-          />
+          <MessageBubble key={msg._id} message={msg} />
         ))}
       </div>
-      <MessageInput />
+      <MessageInput userId={userId} />
     </div>
   );
 }

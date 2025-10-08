@@ -13,6 +13,7 @@ import morganMiddleware from './middlewares/log/morgan.middleware.js';
 import corsOptions from './configs/cros.config.js';
 import createLimiter from './middlewares/safety/ratelimiter.middleware.js';
 import client from './configs/redis.config.js';
+import { updateOneUser } from './models/controllers/users/users.controller.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -39,6 +40,7 @@ io.on("connection", async (socket) => {
   socket.on("disconnect", async () => {
     console.log("Client disconnected successfully " + receiverId);
     await client.hDel("usersIdToSocketId", receiverId);
+    await updateOneUser({ _id: receiverId }, { status: "offline" })
 
     io.emit("getOnlineUsers", await client.hGetAll("usersIdToSocketId"));
   });
@@ -51,11 +53,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(helmet({
-  crossOriginResourcePolicy: { policy: "cross-origin" }, 
+  crossOriginResourcePolicy: { policy: "cross-origin" },
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      imgSrc: ["'self'", "data:", "http://localhost:5173"], 
+      imgSrc: ["'self'", "data:", "http://localhost:5173"],
       styleSrc: ["'self'", "'unsafe-inline'", "https:"],
       scriptSrc: ["'self'", "https:"],
     },

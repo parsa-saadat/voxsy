@@ -31,7 +31,7 @@ export const sendMessageService = async (receiverId, data, requester) => {
     }
   }
 
-  files = files.filter((item) => item == null)
+  files = files.filter((item) => item !== null)
 
   const newMessage = {
     receiver_id: new ObjectId(receiver._id),
@@ -73,7 +73,12 @@ export const seenMessageService = async (messageId, requester) => {
 
 export const getMessagesService = async (receiverId, requester, filters) => {
   let desc = filters.desc == "true" ? true : false, search = filters.search
-  let messages = await findMessages({ receiver_id: receiverId, sender_id: requester._id }, desc)
+  let messages = await findMessages({
+    $or: [
+      { receiver_id: new ObjectId(receiverId), sender_id: new ObjectId(requester._id) },
+      { receiver_id: new ObjectId(requester._id), sender_id: new ObjectId(receiverId) }
+    ]
+  }, desc)
 
   if (search)
     messages = messages.filter((item) => item.content.includes(search))

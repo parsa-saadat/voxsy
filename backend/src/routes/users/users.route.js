@@ -6,7 +6,7 @@ const router = Router()
 
 router.get('/', authenticateToken, getUsersController)
 
-router.get('/', authenticateToken, getUserController)
+router.get('/:id', authenticateToken, getUserController)
 
 router.put('/:id', authenticateToken, updateUserController)
 

@@ -1,82 +1,156 @@
-### **Voxsy** 🗣️
+# Chat App - Real-time Messaging Application
 
-#### **A Chat and Voice Service**
+A modern and powerful chat application with real-time communication capabilities
 
-| Project Description | GitHub Link |
-| :--- | :--- |
-| **Backend** | **Developed By:** [Parsa SS](https://github.com/parsa-saadat) |
-| **Frontend** | **Developed By:** [Sepehr Jam](https://github.com/SepehrJam) |
+![Chat App Banner](https://via.placeholder.com/1200x400/3B82F6/FFFFFF?text=Chat+App+-+Real-time+Messaging)
 
------
+## 🚀 Key Features
 
-### **Backend Setup** ⚙️
+- **Real-time Chat** with WebSocket technology
+- **Multimedia Support** - Send images, videos, and audio
+- **Modern & Responsive** UI
+- **Secure Authentication** with JWT
+- **Multiple Theme** support
+- **Chat History** with persistent storage
 
-To get the **backend** of this project up and running, follow these steps:
+## 🛠 Technologies
 
-1.  **Install Dependencies:** First, run the following command in your terminal to install all the required packages.
+### Backend
+- **Node.js** - Server runtime environment
+- **Express.js** - Web framework
+- **Socket.io** - Real-time communication
 
-    ```bash
-    npm i
-    ```
+### Frontend
+- **Vite + React** - Modern frontend build
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
 
-2.  **Create `.env` File:** Create a file named `.env` in the root of your project and add the following environment variables.
+### Databases
+- **MongoDB** - Main data storage
+- **Redis** - Cache and sessions
 
-      * **App Config:**
-          * `STATUS=DEV` (Allowed values: `DEV` for development, `PROD` for production)
-      * **Client Config:**
-          * `CLIENT_URL=http://localhost:5173`
-          * `SERVICE_URL=http://localhost:3000`
-      * **Domain Config:**
-          * `PORT=3000`
-          * `HOST=localhost`
-          * `PROTOCOL=http`
-      * **CORS Config:**
-          * `CORS_ORIGIN=*`
-          * `CORS_METHODS=GET,POST,PUT,DELETE,PATCH`
-          * `CORS_ALLOWED_HEADERS=Content-Type,Authorization`
-      * **Log Config:**
-          * `LOG_FILE_PATH=./log/http.log`
-      * **MongoDB Config:**
-          * `MONGO_URI=mongodb://localhost:27017/`
-          * `MONGO_DATABASE_NAME=vox`
-      * **Storage:**
-          * `MAX_MB_UPLOAD_SIZE=5`
-      <!-- * **Payment Config:**
-          * `VERIFY_PAYMENT_CALLBACK_PAHT=/orders/verify`
-          * `VERIFY_PAYMENT_CALLBACK_URL=http://localhost:3000/orders/verify`
-      * **Zarinpal Payment Config:**
-          * `ZARINPAL_MERCHANT_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX`
-          * `ZARINPAL_PAYMENT_REQUEST_URL=https://sandbox.zarinpal.com/pg/v4/payment/request.json`
-          * `ZARINPAL_VRIFY_PAYMENT_URL=https://sandbox.zarinpal.com/pg/v4/payment/verify.json`
-          * `ZARINPAL_REFUND_URL=https://sandbox.zarinpal.com/pg/v4/payment/refund.json`
-          * `ZARINPAL_PAY_URL=https://sandbox.zarinpal.com/pg/StartPay` -->
-      * **SMS Config (Kavenegar):**
-          * `KAVENEGAR_API_KEY=...`
-          * `KAVENEGAR_SENDER_NUMBER=...`
-          * `KAVENEGAR_RECEIVER_NUMBER=...`
-          * `KAVENEGAR_VERIFY_TEMPLATE_NAME=verify`
-      * **Email Config:**
-          * `MAIL_SERVICE=gmail`
-          * `MAIL_USER=parsasaadat13881@gmail.com`
-          * `MAIL_CLIENT_ID=...`
-          * `MAIL_CLIENT_SECRET=...`
-          * `MAIL_REFRESH_TOKEN=...`
-          * `MAIL_HTML_AUTH_TEMPLATE_PATH=/templates/auth/auth.template.html`
-      * **Security Config:**
-          * `EXPIRE_AUTH_REQUEST_MIN=5`
-          * `JWT_EXPIRES_IN=30d`
-          * `JWT_SECRET=...`
+## 📦 Core Packages
 
-3.  **Run the Server:** To run the server in development mode, execute the following command.
+- `mongodb` - MongoDB connection
+- `redis` - Redis connection
+- `socket.io` - WebSocket implementation
+- `jsonwebtoken` - Authentication management
+- `bcrypt` - Password encryption
 
-      * 💡 Note: If you don't have an SMS or Email system set up, change the `STATUS` value in the `.env` file to `DEV`.
+## 🎯 Project Purpose
 
-    <!-- end list -->
+This project was created as a learning challenge to master Socket.io and develop a complete chat application. Main focus areas:
 
-    ```bash
-    npm run start:dev
-    ```
+- Learning real-time communication concepts
+- Working with modern technologies
+- Implementing scalable architecture
+- Developing Full-Stack skills
 
-    Upon success, you should see the following message:
+## 🏗 Project Structure
 
-    `Server is running on localhost port 3000`
+```
+chat-app/
+├── backend/          # Main server
+├── frontend/
+│   ├── app/         # Chat application
+│   └── landing/     # Landing page
+├── shared/          # Shared code
+└── docs/           # Documentation
+```
+
+## 🚀 Setup & Installation
+
+### Prerequisites
+- Node.js (version 18 or higher)
+- MongoDB
+- Redis
+
+### Installation & Running
+
+#### Backend
+```bash
+cd backend
+npm install
+cp .env.example .env
+# Configure environment variables in .env file
+npm run dev
+```
+
+#### Frontend (Application)
+```bash
+cd frontend/app
+npm install
+npm run dev
+```
+
+#### Frontend (Landing Page)
+```bash
+cd frontend/landing
+npm install
+npm run dev
+```
+
+## ⚙ Configuration
+
+Configure the `.env` file with appropriate values:
+
+```env
+# Main Settings
+STATUS=DEV
+PORT=3000
+CLIENT_URL=http://localhost:5173
+
+# Databases
+MONGO_URI=mongodb://localhost:27017/
+MONGO_DATABASE_NAME=chat_app
+REDIS_URL=redis://127.0.0.1:6379
+
+# Security
+JWT_SECRET=your-super-secret-jwt-key
+JWT_EXPIRES_IN=30d
+
+# Files
+MAX_MB_UPLOAD_SIZE=10
+ALLOWED_MIME_TYPES=image/jpeg,image/png,image/gif,video/mp4,audio/mpeg
+
+# SMS (Optional)
+KAVENEGAR_API_KEY=your-api-key
+KAVENEGAR_SENDER_NUMBER=your-sender-number
+
+# Email (Optional)
+MAIL_SERVICE=gmail
+MAIL_USER=your-email@gmail.com
+```
+
+## 📱 Access Points
+
+- **Chat Application**: http://localhost:4000
+- **Landing Page**: http://localhost:4001
+- **API Server**: http://localhost:3000
+
+## 🔧 Development
+
+### Available Scripts
+```bash
+npm run dev      # Development mode
+npm run build    # Build project
+npm run start    # Production mode
+npm run test     # Run tests
+```
+
+## 🤝 Contribution
+
+This educational project is designed for programming skill development. To contribute:
+
+1. Fork the project
+2. Create a new branch
+3. Commit your changes
+4. Submit a pull request
+
+## 📄 License
+
+This project is released under the MIT License.
+
+---
+
+**Built with ❤️ for learning and new challenges**
