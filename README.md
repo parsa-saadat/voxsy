@@ -130,10 +130,10 @@ MAIL_USER=your-email@gmail.com
 
 ### Available Scripts
 ```bash
-npm run dev      # Development mode
+npm run start:dev      # Development mode
 npm run build    # Build project
 npm run start    # Production mode
-npm run test     # Run tests
+npm run format   # Run tests
 ```
 
 ## 🤝 Contribution
