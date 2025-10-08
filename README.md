@@ -52,10 +52,8 @@ This project was created as a learning challenge to master Socket.io and develop
 chat-app/
 ├── backend/          # Main server
 ├── frontend/
-│   ├── app/         # Chat application
-│   └── landing/     # Landing page
-├── shared/          # Shared code
-└── docs/           # Documentation
+    ├── app/         # Chat application
+    └── landing/     # Landing page
 ```
 
 ## 🚀 Setup & Installation
