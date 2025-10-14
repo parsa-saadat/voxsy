@@ -23,7 +23,6 @@ function PrePage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (phone && validateIRPhoneSyntax(phone)) {
-      console.log(import.meta.env.VITE_APP_API_URL);
       axios
         .post(`${import.meta.env.VITE_APP_API_URL}/auth/pre`, {
           phone: phone,

@@ -51,8 +51,6 @@ export default function MessageInput({ userId }) {
         fileIds = await uploadFilesAndGetIds();
       }
 
-      console.log(fileIds);
-
       await axios.post(
         `${import.meta.env.VITE_APP_API_URL}/message/send/${userId}`,
         { content: message.content, files: fileIds },
@@ -67,7 +65,14 @@ export default function MessageInput({ userId }) {
   };
 
   return (
-    <div className="flex items-center gap-2 justify-center mb-2">
+    <div className="flex flex-col items-center gap-2 justify-center mb-2">
+      <div
+        className={`flex gap-1 text-xs ${files.length > 0 ? 'block h-full' : 'hidden h-0'}`}
+      >
+        {files.map((f, i) => (
+          <span  key={i}>{f.name}</span>
+        ))}
+      </div>
       <div className="flex gap-4 w-[70%] items-center justify-center rounded p-3 bg-[--gary-dark] backdrop-blur-xl">
         <button onClick={handleAddFile}>
           <FontAwesomeIcon
@@ -83,14 +88,6 @@ export default function MessageInput({ userId }) {
           onChange={handleFileChange}
           className="hidden"
         />
-
-        {files.length > 0 && (
-          <div className="flex gap-1 text-xs text-[--gray-dark]">
-            {files.map((f, i) => (
-              <span key={i}>{f.name}</span>
-            ))}
-          </div>
-        )}
 
         <input
           value={message.content}

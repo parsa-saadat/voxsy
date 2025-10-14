@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import MessageBubble from './MessageBubble';
 import MessageInput from './MessageInput';
+import ChatHeader from './ChatHeader';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 
@@ -28,6 +29,7 @@ export default function ChatWindow({ userId }) {
 
   return (
     <div className="flex-1 flex flex-col bg-gray-800/50 backdrop-blur-md">
+      <ChatHeader userId={userId}/>
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {messages.map((msg) => (
           <MessageBubble key={msg._id} message={msg} />

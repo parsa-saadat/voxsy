@@ -9,7 +9,7 @@ import helmet from 'helmet';
 import { Server } from 'socket.io';
 
 import routes from './routes/index.js';
-import morganMiddleware from './middlewares/log/morgan.middleware.js';
+import morganMiddleware from './middlewares/logs/morgan.middleware.js';
 import corsOptions from './configs/cros.config.js';
 import createLimiter from './middlewares/safety/ratelimiter.middleware.js';
 import client from './configs/redis.config.js';

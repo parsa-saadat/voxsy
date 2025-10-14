@@ -1,11 +1,12 @@
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
 
 export default function MessageBubble({ message }) {
   const { i18n } = useTranslation();
   const user = JSON.parse(localStorage.getItem('user'));
   const isMe = message.sender_id === user._id;
-
-  console.log(message.sender_id, user._id);
 
   const alignment = isMe ? 'justify-end' : 'justify-start';
 
@@ -41,8 +42,27 @@ export default function MessageBubble({ message }) {
             ))}
           </div>
         )}
-
-        <div className={bubbleClass}>{message.content}</div>
+        {message.content.length > 0 && (
+          <div className={bubbleClass}>
+            <span>{message.content}</span>
+            <br />
+            <div className="flex gap-2 justify-end">
+              <span className="text-xs">{message.edited ? t('edited') : ''}</span>
+              {isMe && (
+                <span className="text-xs flex items-start justify-end mt-1">
+                  {message.seen ? (
+                    <div className="flex">
+                      <FontAwesomeIcon icon={faCheck} className="me-[-10px]" />
+                      <FontAwesomeIcon icon={faCheck} />
+                    </div>
+                  ) : (
+                    <FontAwesomeIcon icon={faCheck} />
+                  )}
+                </span>
+              )}
+            </div>
+          </div>
+        )}
 
         <div
           className={`text-xs text-gray-500 mt-1 ${i18n.language == 'en' && isMe ? 'text-right' : ''} ${i18n.language == 'fa' && isMe ? 'text-left' : ''}`}
