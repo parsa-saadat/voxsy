@@ -81,13 +81,6 @@ npm install
 npm run dev
 ```
 
-#### Frontend (Landing Page)
-```bash
-cd frontend/landing
-npm install
-npm run dev
-```
-
 ## ⚙ Configuration
 
 Configure the `.env` file with appropriate values:
